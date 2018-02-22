@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_inicio"
+        android:icon="@drawable/ic_inicio_black_24dp"
+        android:title="@string/titulo_inicio" />
+
+    <item
+        android:id="@+id/navigation_categorias"
+        android:icon="@drawable/ic_store_black_24dp"
+        android:title="@string/titulo_categorias" />
+
+    <item
+        android:id="@+id/navigation_ofertas"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="@string/titulo_ofertas" />
+
+
+</menu>
