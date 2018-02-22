@@ -67,7 +67,6 @@ public class LoginActivity extends AppCompatActivity {
     private View mLoginFormView;
     ServiciosRest serviciosRest = new ServiciosRest();
 
-    //int PermisionCheckInternet = ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET);
     String urlLogin = serviciosRest.getUrlLogin();
 
     @Override
