@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,7 +41,8 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
     }
 
     @Override
-    public void onBindViewHolder(CategoriaViewHolder holder, int position) {
+    public void onBindViewHolder(final CategoriaViewHolder holder, int position) {
+        holder.id = listaCategorias.get(position).getId_categoria();
         holder.tvCategoria.setText(listaCategorias.get(position).getNombre());
         if(listaCategorias.get(position).getImagenUrl()!=null){
             //holder.imgCategoria.setImageBitmap(listaCategorias.get(position).getImagenUrl());
@@ -48,8 +50,16 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
         }else{
             holder.imgCategoria.setImageResource(R.mipmap.ic_launcher);
         }
+        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context,holder.id,Toast.LENGTH_SHORT).show();
+            }
+        });
+
         //imageLoader.DisplayImage(listaCategorias.get(position).getImagenUrl(),holder.imgCategoria);
     }
+
 
     private void cargarImagenWebService(String rutaImagen, final CategoriaViewHolder holder) {
 
@@ -81,14 +91,17 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
     }
 
     public class CategoriaViewHolder extends RecyclerView.ViewHolder{
+        int id;
         TextView tvCategoria;
         ImageView imgCategoria;
-
+        RelativeLayout relativeLayout;
 
         public CategoriaViewHolder(View itemView){
             super(itemView);
+            id = 0;
             tvCategoria = (TextView)itemView.findViewById(R.id.tvCategoria);
             imgCategoria = (ImageView)itemView.findViewById(R.id.imgCategoria);
+            relativeLayout = (RelativeLayout)itemView.findViewById(R.id.layoutCategoria);
         }
     }
 }

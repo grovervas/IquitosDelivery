@@ -65,6 +65,7 @@ public class ListaCategoriaFragment extends Fragment implements Response.Listene
 
         request = Volley.newRequestQueue(getContext());
         cargarServicioWeb();
+
         return view;
     }
 

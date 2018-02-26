@@ -52,12 +52,12 @@ public class MainActivity extends AppCompatActivity {
                 }
                 fragmentTransaction.replace(R.id.fragment_principal, fragment);
                 fragmentTransaction.commit();
-                return false;
+                return true;
             }
         });
 
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        Fragment fragment = new ListaCategoriaFragment();
+        Fragment fragment = new ListaInicioFragment();
         fragmentTransaction.add(R.id.fragment_principal, fragment);
         fragmentTransaction.commit();
 
