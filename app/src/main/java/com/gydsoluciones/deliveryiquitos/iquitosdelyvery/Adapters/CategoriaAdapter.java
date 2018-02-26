@@ -14,7 +14,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.gydsoluciones.deliveryiquitos.iquitosdelyvery.Clases.Categorias;
-import com.gydsoluciones.deliveryiquitos.iquitosdelyvery.Clases.ImageLoader;
 import com.gydsoluciones.deliveryiquitos.iquitosdelyvery.Clases.VolleySingleton;
 import com.gydsoluciones.deliveryiquitos.iquitosdelyvery.R;
 
@@ -27,7 +26,6 @@ import java.util.ArrayList;
 public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.CategoriaViewHolder> {
 
     ArrayList<Categorias> listaCategorias;
-    //ImageLoader imageLoader;
     Context context;
 
     public CategoriaAdapter(ArrayList<Categorias> listaCategorias, Context context){
