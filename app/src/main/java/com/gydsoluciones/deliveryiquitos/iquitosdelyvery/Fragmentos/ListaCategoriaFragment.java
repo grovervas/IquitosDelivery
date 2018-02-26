@@ -65,39 +65,6 @@ public class ListaCategoriaFragment extends Fragment implements Response.Listene
 
         request = Volley.newRequestQueue(getContext());
         cargarServicioWeb();
-
-
-        /*RequestQueue queue = Volley.newRequestQueue(getContext());
-        StringRequest request = new StringRequest(Request.Method.GET, serviciosRest.getUrlCategorias(), new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.i("LOG_VOLLEY", response);
-                int id=0;
-                String desc = "";
-                String img = "";
-                try {
-                    JSONArray jsonArray = new JSONArray(response);
-                    for(int i = 0;i<jsonArray.length();i++){
-                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        id = jsonObject.getInt("id");
-                        desc = jsonObject.getString("descripcion");
-                        img = jsonObject.getString("imagen");
-                        listaCategorias.add(new Categorias(id,desc,img));
-                    }
-                    CategoriaAdapter adapter = new CategoriaAdapter(listaCategorias);
-                    recyclerCategoria.setAdapter(adapter);
-                }catch(JSONException e){
-                    e.printStackTrace();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("LOG_VOLLEY", error.toString());
-            }
-        });
-        queue.add(request);*/
         return view;
     }
 
