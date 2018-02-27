@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +15,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.gydsoluciones.deliveryiquitos.iquitosdelyvery.Clases.Categorias;
+import com.gydsoluciones.deliveryiquitos.iquitosdelyvery.Clases.Establecimiento;
 import com.gydsoluciones.deliveryiquitos.iquitosdelyvery.Clases.VolleySingleton;
 import com.gydsoluciones.deliveryiquitos.iquitosdelyvery.Interfaces.ItemClickListener;
 import com.gydsoluciones.deliveryiquitos.iquitosdelyvery.R;
@@ -23,45 +23,45 @@ import com.gydsoluciones.deliveryiquitos.iquitosdelyvery.R;
 import java.util.ArrayList;
 
 /**
- * Created by grva on 21/02/2018.
+ * Created by grva on 26/02/2018.
  */
 
-public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.CategoriaViewHolder> {
+public class EstablecimientoAdapter extends RecyclerView.Adapter<EstablecimientoAdapter.EstablecimientoViewHolder> {
 
-    ArrayList<Categorias> listaCategorias;
+    ArrayList<Establecimiento> listaEstablecimientos;
     Context context;
 
-    public CategoriaAdapter(ArrayList<Categorias> listaCategorias, Context context){
-        this.listaCategorias = listaCategorias;
+    public EstablecimientoAdapter(ArrayList<Establecimiento> listaEstablecimientos, Context context){
+        this.listaEstablecimientos = listaEstablecimientos;
         this.context = context;
     }
 
     @Override
-    public CategoriaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_categorias,null,false);
-        return new CategoriaViewHolder(view);
+    public EstablecimientoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_grid_establecimientos,null,false);
+        return new EstablecimientoViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final CategoriaViewHolder holder, int position) {
+    public void onBindViewHolder(final EstablecimientoViewHolder holder, int position) {
         //holder.id = listaCategorias.get(position).getId_categoria();
-        holder.tvCategoria.setText(listaCategorias.get(position).getNombre());
-        if(listaCategorias.get(position).getImagenUrl()!=null){
-            cargarImagenWebService(listaCategorias.get(position).getImagenUrl(),holder);
+        holder.idDescEstablecimiento.setText(listaEstablecimientos.get(position).getNombre());
+        if(listaEstablecimientos.get(position).getImagen()!=null){
+            cargarImagenWebService(listaEstablecimientos.get(position).getImagen(),holder);
         }else{
-            holder.imgCategoria.setImageResource(R.mipmap.ic_launcher);
+            holder.idImgEstablecimiento.setImageResource(R.mipmap.ic_launcher);
         }
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position, boolean isLongClick) {
                 //Toast.makeText(context,listaCategorias.get(position).getId_categoria(),Toast.LENGTH_SHORT);
-                Log.i("DeliveryIQT","valor:" + listaCategorias.get(position).getId_categoria());
+                Log.i("DeliveryIQT","valor:" + listaEstablecimientos.get(position).getId_establecimiento());
             }
         });
     }
 
 
-    private void cargarImagenWebService(String rutaImagen, final CategoriaViewHolder holder) {
+    private void cargarImagenWebService(String rutaImagen, final EstablecimientoViewHolder holder) {
 
         //String ip = context.getString(R.string.ip);
 
@@ -71,7 +71,7 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
         ImageRequest imageRequest=new ImageRequest(urlImagen, new Response.Listener<Bitmap>() {
             @Override
             public void onResponse(Bitmap response) {
-                holder.imgCategoria.setImageBitmap(response);
+                holder.idImgEstablecimiento.setImageBitmap(response);
             }
         }, 0, 0, ImageView.ScaleType.CENTER, null, new Response.ErrorListener() {
             @Override
@@ -87,21 +87,21 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
 
     @Override
     public int getItemCount() {
-        return listaCategorias.size();
+        return listaEstablecimientos.size();
     }
 
-    public class CategoriaViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
+    public class EstablecimientoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
         //int id;
-        TextView tvCategoria;
-        ImageView imgCategoria;
+        TextView idDescEstablecimiento;
+        ImageView idImgEstablecimiento;
 
         private ItemClickListener itemClickListener;
 
-        public CategoriaViewHolder(View itemView){
+        public EstablecimientoViewHolder(View itemView){
             super(itemView);
             //this.id = 0;
-            tvCategoria = (TextView)itemView.findViewById(R.id.tvCategoria);
-            imgCategoria = (ImageView)itemView.findViewById(R.id.imgCategoria);
+            idDescEstablecimiento = (TextView)itemView.findViewById(R.id.idDescEstablecimiento);
+            idImgEstablecimiento = (ImageView)itemView.findViewById(R.id.idImgEstablecimiento);
 
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);

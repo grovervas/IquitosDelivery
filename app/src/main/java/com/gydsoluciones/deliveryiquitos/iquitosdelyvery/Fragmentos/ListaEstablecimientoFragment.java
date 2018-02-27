@@ -2,7 +2,6 @@ package com.gydsoluciones.deliveryiquitos.iquitosdelyvery.Fragmentos;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -12,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -20,14 +18,12 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.gydsoluciones.deliveryiquitos.iquitosdelyvery.Adapters.CategoriaAdapter;
+import com.gydsoluciones.deliveryiquitos.iquitosdelyvery.Adapters.EstablecimientoAdapter;
 import com.gydsoluciones.deliveryiquitos.iquitosdelyvery.Clases.Categorias;
+import com.gydsoluciones.deliveryiquitos.iquitosdelyvery.Clases.Establecimiento;
 import com.gydsoluciones.deliveryiquitos.iquitosdelyvery.Clases.ServiciosRest;
-import com.gydsoluciones.deliveryiquitos.iquitosdelyvery.LoginActivity;
-import com.gydsoluciones.deliveryiquitos.iquitosdelyvery.MainActivity;
 import com.gydsoluciones.deliveryiquitos.iquitosdelyvery.R;
 
 import org.json.JSONArray;
@@ -36,20 +32,21 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class ListaCategoriaFragment extends Fragment implements Response.Listener<JSONArray>, Response.ErrorListener{
 
-    private RecyclerView recyclerCategoria;
+public class ListaEstablecimientoFragment extends Fragment implements Response.Listener<JSONArray>, Response.ErrorListener {
+
+    private RecyclerView recyclerEstablecimiento;
     private ServiciosRest serviciosRest = new ServiciosRest();
-    private RecyclerView.LayoutManager layoutManager;
+    //private RecyclerView.LayoutManager layoutManager;
 
-    ArrayList<Categorias> listaCategorias;
+    ArrayList<Establecimiento> listaEstablecimientos;
     ProgressDialog dialog;
 
     RequestQueue request;
     JsonArrayRequest jsonArrayRequest;
 
 
-    public ListaCategoriaFragment() {
+    public ListaEstablecimientoFragment() {
         // Required empty public constructor
     }
 
@@ -57,12 +54,10 @@ public class ListaCategoriaFragment extends Fragment implements Response.Listene
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_lista_categoria, container, false);
-        listaCategorias = new ArrayList<>();
-        recyclerCategoria = (RecyclerView)view.findViewById(R.id.recycler_categoria);
-        recyclerCategoria.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerCategoria.setHasFixedSize(true);
-
-        //layoutManager = new LinearLayoutManager(this);
+        listaEstablecimientos = new ArrayList<>();
+        recyclerEstablecimiento = (RecyclerView)view.findViewById(R.id.recycler_establecimiento);
+        recyclerEstablecimiento.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerEstablecimiento.setHasFixedSize(true);
 
         request = Volley.newRequestQueue(getContext());
         cargarServicioWeb();
@@ -94,21 +89,22 @@ public class ListaCategoriaFragment extends Fragment implements Response.Listene
     @Override
     public void onResponse(JSONArray response) {
 
-        Categorias categorias=null;
+        Establecimiento establecimiento=null;
         JSONArray json = response;
         try{
             for(int i=0;i<json.length();i++){
                 JSONObject jsonObject = null;
                 jsonObject = json.getJSONObject(i);
                 Log.i("Imagen:",jsonObject.optString("imagen"));
-                categorias = new Categorias(jsonObject.optInt("id"),jsonObject.optString("descripcion"),jsonObject.optString("imagen"));
-                listaCategorias.add(categorias);
+                establecimiento = new Establecimiento(jsonObject.optInt("id"),jsonObject.optString("descripcion"),jsonObject.optString("imagen"));
+                listaEstablecimientos.add(establecimiento);
             }
         }catch (JSONException e){
             e.printStackTrace();
         }
         dialog.hide();
-        CategoriaAdapter adapter = new CategoriaAdapter(listaCategorias, getContext());
-        recyclerCategoria.setAdapter(adapter);
+        EstablecimientoAdapter adapter = new EstablecimientoAdapter(listaEstablecimientos, getContext());
+        recyclerEstablecimiento.setAdapter(adapter);
     }
+
 }

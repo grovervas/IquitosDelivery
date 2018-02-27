@@ -62,34 +62,4 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
 
     }
-
-
-    /*private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            Fragment fragment = null;
-            switch (item.getItemId()) {
-                case R.id.navigation_inicio:
-                    fragment = new ListaInicioFragment();
-                    Log.i("Delivery","Inicio");
-                    break;
-                case R.id.navigation_categorias:
-                    fragment = new ListaCategoriaFragment();
-                    Log.i("Delivery","Categorias");
-                    break;
-                case R.id.navigation_ofertas:
-                    fragment = new ListaOfertasFragment();
-                    Log.i("Delivery","Ofertas");
-                    break;
-            }
-            fragmentTransaction.replace(R.id.fragment_principal, fragment);
-            fragmentTransaction.commit();
-            return true;
-        }
-    };*/
-
 }

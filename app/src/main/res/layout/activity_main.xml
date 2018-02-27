@@ -7,9 +7,8 @@
     android:layout_height="match_parent"
     tools:context="com.gydsoluciones.deliveryiquitos.iquitosdelyvery.MainActivity">
 
-    <fragment
+    <FrameLayout
         android:id="@+id/fragment_principal"
-        android:name="android.support.v4.app.ListFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
