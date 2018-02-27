@@ -63,9 +63,7 @@ public class EstablecimientoAdapter extends RecyclerView.Adapter<Establecimiento
 
     private void cargarImagenWebService(String rutaImagen, final EstablecimientoViewHolder holder) {
 
-        //String ip = context.getString(R.string.ip);
-
-        String urlImagen= rutaImagen;
+        String urlImagen = rutaImagen;
         urlImagen=urlImagen.replace(" ","%20");
 
         ImageRequest imageRequest=new ImageRequest(urlImagen, new Response.Listener<Bitmap>() {

@@ -14,7 +14,7 @@ public class Establecimiento {
     public Establecimiento(int id_establecimiento, String nombre, String imagen) {
         this.id_establecimiento = id_establecimiento;
         this.nombre = nombre;
-        this.imagen = imagen;
+        this.imagen = this.serviciosRest.getUrlImgEstablecimiento() + imagen;
     }
 
     public int getId_establecimiento() {

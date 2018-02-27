@@ -1,7 +1,12 @@
 package com.gydsoluciones.deliveryiquitos.iquitosdelyvery.Adapters;
 
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,7 +22,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.gydsoluciones.deliveryiquitos.iquitosdelyvery.Clases.Categorias;
 import com.gydsoluciones.deliveryiquitos.iquitosdelyvery.Clases.VolleySingleton;
+import com.gydsoluciones.deliveryiquitos.iquitosdelyvery.Fragmentos.ListaCategoriaFragment;
+import com.gydsoluciones.deliveryiquitos.iquitosdelyvery.Fragmentos.ListaEstablecimientoFragment;
 import com.gydsoluciones.deliveryiquitos.iquitosdelyvery.Interfaces.ItemClickListener;
+import com.gydsoluciones.deliveryiquitos.iquitosdelyvery.MainActivity;
 import com.gydsoluciones.deliveryiquitos.iquitosdelyvery.R;
 
 import java.util.ArrayList;
@@ -55,7 +63,15 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
             @Override
             public void onClick(View view, int position, boolean isLongClick) {
                 //Toast.makeText(context,listaCategorias.get(position).getId_categoria(),Toast.LENGTH_SHORT);
-                Log.i("DeliveryIQT","valor:" + listaCategorias.get(position).getId_categoria());
+                //Log.i("DeliveryIQT","valor:" + listaCategorias.get(position).getId_categoria());
+                Bundle args = new Bundle();
+                args.putInt("categoria",listaCategorias.get(position).getId_categoria());
+                FragmentManager fragmentManager = ((Activity)context).getFragmentManager();
+                Fragment fragment = new ListaEstablecimientoFragment();
+                fragment.setArguments(args);
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.fragment_principal,fragment);
+                transaction.commit();
             }
         });
     }

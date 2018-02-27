@@ -5,6 +5,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -18,6 +19,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.gydsoluciones.deliveryiquitos.iquitosdelyvery.Adapters.CategoriaAdapter;
 import com.gydsoluciones.deliveryiquitos.iquitosdelyvery.Adapters.EstablecimientoAdapter;
@@ -33,7 +35,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 
-public class ListaEstablecimientoFragment extends Fragment implements Response.Listener<JSONArray>, Response.ErrorListener {
+public class ListaEstablecimientoFragment extends Fragment implements Response.Listener<JSONObject>, Response.ErrorListener {
 
     private RecyclerView recyclerEstablecimiento;
     private ServiciosRest serviciosRest = new ServiciosRest();
@@ -43,7 +45,8 @@ public class ListaEstablecimientoFragment extends Fragment implements Response.L
     ProgressDialog dialog;
 
     RequestQueue request;
-    JsonArrayRequest jsonArrayRequest;
+    JsonObjectRequest jsonObjectRequest;
+    int codigoCategoria;
 
 
     public ListaEstablecimientoFragment() {
@@ -53,10 +56,13 @@ public class ListaEstablecimientoFragment extends Fragment implements Response.L
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_lista_categoria, container, false);
+        View view = inflater.inflate(R.layout.fragment_lista_establecimiento, container, false);
+
+        codigoCategoria = getArguments().getInt("categoria");
+
         listaEstablecimientos = new ArrayList<>();
         recyclerEstablecimiento = (RecyclerView)view.findViewById(R.id.recycler_establecimiento);
-        recyclerEstablecimiento.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerEstablecimiento.setLayoutManager(new GridLayoutManager(getContext(),2));
         recyclerEstablecimiento.setHasFixedSize(true);
 
         request = Volley.newRequestQueue(getContext());
@@ -71,10 +77,9 @@ public class ListaEstablecimientoFragment extends Fragment implements Response.L
         dialog.setMessage("Procesando...");
         dialog.show();
 
-        String url = serviciosRest.getUrlCategorias();
-        jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,url,null, this,this);
-        request.add(jsonArrayRequest);
-
+        String url = serviciosRest.getUrlEstablecimiento() + codigoCategoria;
+        jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,url,null, this,this);
+        request.add(jsonObjectRequest);
     }
 
     @Override
@@ -87,11 +92,12 @@ public class ListaEstablecimientoFragment extends Fragment implements Response.L
     }
 
     @Override
-    public void onResponse(JSONArray response) {
+    public void onResponse(JSONObject response) {
 
-        Establecimiento establecimiento=null;
-        JSONArray json = response;
+        Establecimiento establecimiento = null;
         try{
+            JSONArray json = response.getJSONArray("establecimiento");
+            Log.i("Delivery",json.toString());
             for(int i=0;i<json.length();i++){
                 JSONObject jsonObject = null;
                 jsonObject = json.getJSONObject(i);

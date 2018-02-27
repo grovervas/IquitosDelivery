@@ -9,7 +9,7 @@ public class ServiciosRest {
     private String urlLogin = "http://10.0.2.1/delivery-rest/index.php/login/";
     private String urlCategorias = "http://10.0.2.1/delivery-rest/index.php/categorias/";
     private String urlImgCategoria = "http://10.0.2.1/delivery-rest/public/img/categorias/";
-    private String urlEstablecimiento = "http://10.0.2.1/delivery-rest/establecimiento/";
+    private String urlEstablecimiento = "http://10.0.2.1/delivery-rest/index.php/establecimiento/";
     private String urlImgEstablecimiento = "http://10.0.2.1/delivery-rest/public/img/establecimientos/";
 
     public String getUrlLogin() {
