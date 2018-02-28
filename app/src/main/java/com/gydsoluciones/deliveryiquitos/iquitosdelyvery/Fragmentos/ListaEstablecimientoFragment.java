@@ -39,7 +39,6 @@ public class ListaEstablecimientoFragment extends Fragment implements Response.L
 
     private RecyclerView recyclerEstablecimiento;
     private ServiciosRest serviciosRest = new ServiciosRest();
-    //private RecyclerView.LayoutManager layoutManager;
 
     ArrayList<Establecimiento> listaEstablecimientos;
     ProgressDialog dialog;
@@ -88,7 +87,6 @@ public class ListaEstablecimientoFragment extends Fragment implements Response.L
         Toast.makeText(getContext(),"No se puede conectar",Toast.LENGTH_SHORT).show();
         dialog.hide();
         Log.d("LOG_VOLLEY", error.toString());
-
     }
 
     @Override
